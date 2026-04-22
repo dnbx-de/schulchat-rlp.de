@@ -2,112 +2,120 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <meta name="description" content="Achtung: Dies ist eine Anti-Phishing Warnseite für den Schulchat RLP. Bleibe sicher durch xpsystems.eu und achte auf die korrekte URL.">
-    <meta name="author" content="Fabian Ternis, xpsystems.eu, dnbx.de">
-    <meta name="robots" content="noindex, nofollow"> <meta property="og:title" content="⚠️ Sicherheitshinweis - Falsche Schulchat-Domain">
-    <meta property="og:description" content="Du hast dich vertippt. Dies ist eine Aufklärungsseite zum Schutz vor Phishing. Bleibe sicher durch xpsystems.eu!">
-    <meta property="og:type" content="website">
+    <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+    <meta name="description" content="Kommunikationsplattform in Rheinland-Pfalz - Schulungsumgebung">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#2e628c">
 
-    <title>Sicherheitshinweis - Dies ist NICHT der Schulchat RLP</title>
-    
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Schulchat RLP">
+
+    <title>Schulchat RLP - Lade...</title>
+
     <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: #f8d7da;
-            color: #721c24;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
+        /* Basis-CSS aus deiner Vorgabe */
+        body, html {
             margin: 0;
+            height: 100%;
+            background: #ffffff;
+            background-size: 100% 100%;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+            overflow: hidden; /* Simuliert das App-Feeling (kein Scrollen) */
+            user-select: none;
+            touch-action: none;
+        }
+
+        .center {
+            margin: 0;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             text-align: center;
-            padding: 20px;
-            box-sizing: border-box;
+            width: 100%;
         }
-        .warning-box {
-            background-color: #fff;
-            border: 3px solid #dc3545;
-            border-radius: 12px;
-            padding: 40px;
-            max-width: 600px;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+
+        /* Dark Mode Unterstützung */
+        @media (prefers-color-scheme: dark) {
+            body, html {
+                background: #121212;
+                color: #e0e0e0;
+            }
         }
-        h1 {
-            color: #dc3545;
-            margin-top: 0;
+
+        /* Simuliertes UI-Element (ähnlich zum Flutter-Loading-State) */
+        .splash-logo {
+            width: 120px;
+            height: 120px;
+            margin-bottom: 20px;
         }
-        p {
-            font-size: 1.1em;
-            line-height: 1.5;
+
+        .title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #2e628c;
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
         }
-        .highlight-safe {
-            background-color: #e2e3e5;
-            padding: 15px;
-            border-radius: 8px;
-            margin: 20px 0;
-            color: #383d41;
-            font-weight: 500;
-            border-left: 5px solid #2e628c;
+
+        @media (prefers-color-scheme: dark) {
+            .title {
+                color: #5b9bd5;
+            }
         }
-        a.button {
-            display: inline-block;
-            margin-top: 15px;
-            padding: 12px 24px;
-            background-color: #2e628c;
-            color: white;
-            text-decoration: none;
-            border-radius: 6px;
-            font-weight: bold;
-            font-size: 1.1em;
-            transition: background-color 0.2s;
-        }
-        a.button:hover {
-            background-color: #1c3e5a;
-        }
-        .footer {
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 1px solid #f5c6cb;
-            font-size: 0.85em;
+
+        .subtitle {
+            font-size: 14px;
             color: #666;
-            line-height: 1.6;
+            margin-bottom: 30px;
         }
-        .footer a {
-            color: #444;
-            font-weight: bold;
-            text-decoration: none;
+
+        /* Ein einfacher CSS-Loader statt Flutter-CanvasKit */
+        .loader {
+            border: 3px solid rgba(46, 98, 140, 0.2);
+            border-top: 3px solid #2e628c;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
         }
-        .footer a:hover {
-            text-decoration: underline;
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Schulungs-Hinweis im Footer */
+        .training-notice {
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+            text-align: center;
+            font-size: 11px;
+            color: #999;
+            opacity: 0.7;
         }
     </style>
 </head>
 <body>
 
-    <div class="warning-box">
-        <h1>⚠️ Achtung: Tippfehler-Domain!</h1>
-        
-        <p>Du hast die Adresse <strong>schulchat-rlp.de</strong> aufgerufen. <br>
-        Dies ist <strong>NICHT</strong> der offizielle Schulchat des Landes Rheinland-Pfalz.</p>
-        
-        <p>Diese Seite ist Teil einer Anti-Phishing- und Awareness-Kampagne. Bitte achte bei sensiblen Logins immer auf die exakte Schreibweise in der Adresszeile deines Browsers, um dich vor Datendiebstahl zu schützen.</p>
-        
-        <div class="highlight-safe">
-            🛡️ <strong>Bleibe sicher durch xpsystems.eu</strong><br>
-            Überprüfe immer die URL, bevor du Passwörter eingibst.
-        </div>
-        
-        <p>Der offizielle Schulchat RLP ist ausschließlich unter der Domain mit dem Punkt erreichbar:</p>
-        
-        <a href="https://schulchat.rlp.de" class="button" rel="noopener noreferrer">Zum echten Schulchat (schulchat.rlp.de)</a>
+    <div class="center">
+        <svg class="splash-logo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="48" fill="#2e628c" />
+            <path d="M25 35 Q 25 25 50 25 Q 75 25 75 35 Q 75 55 50 55 Q 40 55 30 65 L 30 52 Q 25 48 25 35 Z" fill="#ffffff" />
+            <text x="50" y="44" font-family="Arial" font-size="14" font-weight="bold" fill="#2e628c" text-anchor="middle">RLP</text>
+        </svg>
 
-        <div class="footer">
-            <p>Ein Sicherheitsprojekt zur Prävention von Phishing von <strong>Fabian Ternis</strong> (<a href="https://fabianternis.de" target="_blank">fabianternis.de</a>). <br>
-            In Kooperation mit <a href="https://xpsystems.eu" target="_blank">xpsystems.eu/.de</a> und <a href="https://dnbx.de" target="_blank">dnbx.de</a>.</p>
-        </div>
+        <div class="title">Schulchat RLP</div>
+        <div class="subtitle">Verbindung wird hergestellt...</div>
+        
+        <div class="loader"></div>
+    </div>
+
+    <div class="training-notice">
+        Schulungsumgebung • Bereitgestellt durch xpsystems.eu
     </div>
 
 </body>
