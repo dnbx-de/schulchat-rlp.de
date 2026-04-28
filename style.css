@@ -1,0 +1,32 @@
+:root {
+    --color-primary: #f5f5f5;
+    --color-background: #020202;
+    --color-text: #f0f0f0;
+    
+    --font-main: 'Arial', sanf-serif;
+}
+
+body {
+    color: var(--color-text);
+    background-color: var(--color-background);
+    font-family: var(--font-main);
+}
+
+h1 {
+    width: fit-content;
+}
+
+h1::after {
+    content: "";
+    background-color: rgb(255, 106, 106);
+    height: 2px;
+    width: 30%;
+    transform: translateX(12%);
+    display: block;
+    transition: .32s cubic-bezier(.17,.67,.82,1.14);
+}
+
+h1:hover::after {
+    width: 76%;
+    transition: .21s cubic-bezier(.49,-0.08,.39,.61);
+}
