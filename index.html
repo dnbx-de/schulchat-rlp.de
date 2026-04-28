@@ -2,121 +2,45 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-    <meta name="description" content="Kommunikationsplattform in Rheinland-Pfalz - Schulungsumgebung">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="theme-color" content="#2e628c">
-
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="Schulchat RLP">
-
-    <title>Schulchat RLP - Lade...</title>
-
-    <style>
-        /* Basis-CSS aus deiner Vorgabe */
-        body, html {
-            margin: 0;
-            height: 100%;
-            background: #ffffff;
-            background-size: 100% 100%;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-            overflow: hidden; /* Simuliert das App-Feeling (kein Scrollen) */
-            user-select: none;
-            touch-action: none;
-        }
-
-        .center {
-            margin: 0;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-            width: 100%;
-        }
-
-        /* Dark Mode Unterstützung */
-        @media (prefers-color-scheme: dark) {
-            body, html {
-                background: #121212;
-                color: #e0e0e0;
-            }
-        }
-
-        /* Simuliertes UI-Element (ähnlich zum Flutter-Loading-State) */
-        .splash-logo {
-            width: 120px;
-            height: 120px;
-            margin-bottom: 20px;
-        }
-
-        .title {
-            font-size: 24px;
-            font-weight: 600;
-            color: #2e628c;
-            margin-bottom: 8px;
-            letter-spacing: 0.5px;
-        }
-
-        @media (prefers-color-scheme: dark) {
-            .title {
-                color: #5b9bd5;
-            }
-        }
-
-        .subtitle {
-            font-size: 14px;
-            color: #666;
-            margin-bottom: 30px;
-        }
-
-        /* Ein einfacher CSS-Loader statt Flutter-CanvasKit */
-        .loader {
-            border: 3px solid rgba(46, 98, 140, 0.2);
-            border-top: 3px solid #2e628c;
-            border-radius: 50%;
-            width: 30px;
-            height: 30px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        /* Schulungs-Hinweis im Footer */
-        .training-notice {
-            position: absolute;
-            bottom: 20px;
-            width: 100%;
-            text-align: center;
-            font-size: 11px;
-            color: #999;
-            opacity: 0.7;
-        }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Schulchat-RLP | Zentrales Login</title>
+    <meta name="description" content="Offizielles Kommunikationsportal für Schulen in Rheinland-Pfalz.">
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div id="viewport">
+        <main class="auth-layout">
+            <div class="portal-card">
+                <div class="card-glow"></div>
+                
+                <header class="portal-header">
+                    <div class="logo-wrapper">
+                        <img src="logo-2x.png" alt="Schulchat-RLP Logo" class="portal-logo">
+                    </div>
+                    <div class="status-indicator">
+                        <span class="dot"></span> System bereit
+                    </div>
+                </header>
 
-    <div class="center">
-        <svg class="splash-logo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="50" cy="50" r="48" fill="#2e628c" />
-            <path d="M25 35 Q 25 25 50 25 Q 75 25 75 35 Q 75 55 50 55 Q 40 55 30 65 L 30 52 Q 25 48 25 35 Z" fill="#ffffff" />
-            <text x="50" y="44" font-family="Arial" font-size="14" font-weight="bold" fill="#2e628c" text-anchor="middle">RLP</text>
-        </svg>
+                <section class="portal-content">
+                    <div class="text-group">
+                        <h1>Schulchat-RLP</h1>
+                        <p>Das offizielle Kommunikationsportal des Landes Rheinland-Pfalz. Bitte melden Sie sich mit Ihrem Bildungslogin an.</p>
+                    </div>
 
-        <div class="title">Schulchat RLP</div>
-        <div class="subtitle">Verbindung wird hergestellt...</div>
-        
-        <div class="loader"></div>
+                    <div class="action-area">
+                        <a href="https://bildungslogin-rlp.de" class="btn-primary">
+                            <span class="btn-text">Mit Bildungslogin anmelden</span>
+                            <div class="btn-icon">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+                            </div>
+                        </a>
+                    </div>
+                </section>
+            </div>
+        </main>
     </div>
-
-    <div class="training-notice">
-        Schulungsumgebung • Bereitgestellt durch xpsystems.eu
-    </div>
-
+    <script src="script.js"></script>
 </body>
 </html>

@@ -1,0 +1,171 @@
+:root {
+    --brand-primary: #1793d5;
+    --brand-hover: #1ca1e9;
+    --brand-accent: #c4d700;
+    --bg-base: #0a0c10;
+    --card-surface: rgba(17, 20, 24, 0.85);
+    --border-subtle: rgba(255, 255, 255, 0.1);
+    --text-high: #f8fafc;
+    --text-mid: #94a3b8;
+    --font-main: 'Inter', sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    background-color: var(--bg-base);
+    color: var(--text-high);
+    font-family: var(--font-main);
+    height: 100dvh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* ── Sophisticated Background ── */
+.bg-ambient {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background: 
+        radial-gradient(circle at 10% 10%, rgba(23, 147, 213, 0.12) 0%, transparent 40%),
+        radial-gradient(circle at 90% 90%, rgba(196, 215, 0, 0.05) 0%, transparent 40%);
+}
+
+.bg-noise {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    opacity: 0.03;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ── Portal Card ── */
+.portal-card {
+    position: relative;
+    width: 100%;
+    max-width: 440px;
+    background: var(--card-surface);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border: 1px solid var(--border-subtle);
+    border-radius: 24px;
+    padding: 3rem 2.5rem;
+    box-shadow: 
+        0 10px 15px -3px rgba(0, 0, 0, 0.3),
+        0 4px 6px -4px rgba(0, 0, 0, 0.3),
+        inset 0 1px 1px rgba(255, 255, 255, 0.05);
+    animation: reveal 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes reveal {
+    from { opacity: 0; transform: translateY(20px) scale(0.98); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ── Card Elements ── */
+.portal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2.5rem;
+}
+
+.portal-logo {
+    height: 48px;
+    filter: drop-shadow(0 0 12px rgba(23, 147, 213, 0.3));
+}
+
+.status-indicator {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-mid);
+    background: rgba(255,255,255,0.05);
+    padding: 6px 12px;
+    border-radius: 100px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.status-indicator .dot {
+    width: 6px;
+    height: 6px;
+    background: #10b981;
+    border-radius: 50%;
+    box-shadow: 0 0 8px #10b981;
+}
+
+h1 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.75rem;
+    background: linear-gradient(to bottom, #fff, #cbd5e1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.text-group p {
+    color: var(--text-mid);
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    margin-bottom: 2.5rem;
+}
+
+/* ── Professional Button ── */
+.btn-primary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--brand-primary);
+    color: white;
+    text-decoration: none;
+    padding: 4px 4px 4px 20px;
+    border-radius: 14px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.btn-icon {
+    background: rgba(255, 255, 255, 0.15);
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 11px;
+    transition: transform 0.3s;
+}
+
+.btn-primary:hover {
+    background: var(--brand-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px -5px rgba(23, 147, 213, 0.4);
+}
+
+.btn-primary:hover .btn-icon {
+    transform: translateX(2px);
+    background: rgba(255, 255, 255, 0.25);
+}
+
+/* ── Footer ── */
+.portal-footer {
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-subtle);
+    text-align: center;
+    font-size: 0.75rem;
+    color: var(--text-mid);
+}
+
+.footer-credits { margin-bottom: 1rem; line-height: 1.7; }
+.footer-credits strong { color: var(--text-high); font-weight: 600; }
+.footer-links { display: flex; justify-content: center; gap: 1.5rem; opacity: 0.7; }
