@@ -3,32 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Schulchat-RLP | Offizielles Portal</title>
-    <meta name="description" content="Sicherer Messenger-Dienst für Schulen in Rheinland-Pfalz.">
+    <title>Schulchat-RLP | Authentifizierung</title>
+    <meta name="description" content="Sicherer Zugang zum Schulchat Rheinland-Pfalz">
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
 </head>
 <body>
     <canvas id="particle-canvas"></canvas>
-
+    
     <main>
-        <div class="container">
-            <header>
+        <div class="tilt-wrapper">
+            <div class="container" id="main-card">
+                <div class="glow-effect"></div>
                 <img src="logo-2x.png" alt="Schulchat-RLP Logo" class="logo">
-                <div class="badge">Landeslösung RLP</div>
-            </header>
-            
-            <section class="content">
-                <h1>Schulchat-RLP</h1>
-                <p class="subtitle">Sichere Kommunikation für Bildungseinrichtungen</p>
                 
-                <div class="info-box">
-                    <p>Melden Sie sich mit Ihrem zentralen <strong>Bildungslogin</strong> an, um auf Ihre Chats und Gruppen zuzugreifen.</p>
-                </div>
+                <header>
+                    <h1>Schulchat-RLP</h1>
+                    <div class="badge">Offizielles Portal</div>
+                </header>
+
+                <section class="content">
+                    <h2>Willkommen</h2>
+                    <p>Nutzen Sie Ihre Bildungslogin-Daten, um sicher auf die Chat-Plattform Ihrer Schule zuzugreifen.</p>
+                </section>
 
                 <a href="https://bildungslogin-rlp.de" class="login-link">
                     <span>Mit Bildungslogin anmelden</span>
+                    <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                 </a>
-            </section>
+            </div>
         </div>
     </main>
 
