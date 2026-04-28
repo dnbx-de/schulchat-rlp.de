@@ -1,117 +1,74 @@
 /**
- * Schulchat-RLP - Dynamic UI Engine
- * Particle System + Official Footer Injection
+ * Schulchat-RLP Dynamic UI & Particle Engine
  */
 
-const UI = {
-    init() {
-        this.injectBackground();
-        this.initParticles();
-        this.injectFooter();
-    },
-
-    injectBackground() {
-        const mesh = document.createElement('div');
-        mesh.className = 'mesh-bg';
-        document.body.prepend(mesh);
-
-        const canvas = document.createElement('canvas');
-        canvas.id = 'particle-canvas';
-        document.body.prepend(canvas);
-    },
-
-    injectFooter() {
-        const footer = document.createElement('footer');
-        footer.className = 'footer-note';
-        footer.innerHTML = `
-            <span class="footer-credit">Geschützt durch <strong>dnbx.de</strong></span>
-            <div>Entwickelt von <a href="https://xpsystems.de" target="_blank">xpsystems.de</a> & <a href="https://ternis-edv.de" target="_blank">ternis-edv.de</a></div>
-            <div class="footer-links">
-                <a href="#">Impressum</a>
-                <a href="#">Datenschutz</a>
-                <a href="https://bildungslogin-rlp.de">Bildungslogin RLP</a>
-            </div>
-        `;
-        document.querySelector('.glass-card').appendChild(footer);
-    },
-
-    initParticles() {
-        const canvas = document.getElementById('particle-canvas');
-        const ctx = canvas.getContext('2d');
-        let particles = [];
-        const particleCount = window.innerWidth < 480 ? 40 : 100; // Optimization for Mobile
-
-        window.addEventListener('resize', resizeCanvas);
-        resizeCanvas();
-
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-
-        class Particle {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 1.5 + 0.5;
-                this.speedX = Math.random() * 0.4 - 0.2;
-                this.speedY = Math.random() * 0.4 - 0.2;
-                this.opacity = Math.random() * 0.5 + 0.2;
-            }
-
-            update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
-
-                if (this.x > canvas.width) this.x = 0;
-                else if (this.x < 0) this.x = canvas.width;
-                if (this.y > canvas.height) this.y = 0;
-                else if (this.y < 0) this.y = canvas.height;
-            }
-
-            draw() {
-                ctx.fillStyle = `rgba(23, 147, 213, ${this.opacity})`;
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fill();
-            }
-        }
-
-        function createParticles() {
-            for (let i = 0; i < particleCount; i++) {
-                particles.push(new Particle());
-            }
-        }
-
-        function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
-            for (let i = 0; i < particles.length; i++) {
-                particles[i].update();
-                particles[i].draw();
-
-                // Draw lines between nearby particles for "Network" look
-                for (let j = i; j < particles.length; j++) {
-                    const dx = particles[i].x - particles[j].x;
-                    const dy = particles[i].y - particles[j].y;
-                    const distance = Math.sqrt(dx * dx + dy * dy);
-
-                    if (distance < 120) {
-                        ctx.strokeStyle = `rgba(23, 147, 213, ${0.15 - distance / 800})`;
-                        ctx.lineWidth = 0.5;
-                        ctx.beginPath();
-                        ctx.moveTo(particles[i].x, particles[i].y);
-                        ctx.lineTo(particles[j].x, particles[j].y);
-                        ctx.stroke();
-                    }
-                }
-            }
-            requestAnimationFrame(animate);
-        }
-
-        createParticles();
-        animate();
+class ParticleEngine {
+    constructor() {
+        this.canvas = document.getElementById('particle-canvas');
+        this.ctx = this.canvas.getContext('2d');
+        this.particles = [];
+        this.numberOfParticles = window.innerWidth < 768 ? 40 : 100;
+        
+        this.init();
+        window.addEventListener('resize', () => this.resize());
+        this.animate();
     }
-};
 
-document.addEventListener('DOMContentLoaded', () => UI.init());
+    resize() {
+        this.canvas.width = window.innerWidth;
+        this.canvas.height = window.innerHeight;
+    }
+
+    init() {
+        this.resize();
+        for (let i = 0; i < this.numberOfParticles; i++) {
+            this.particles.push({
+                x: Math.random() * this.canvas.width,
+                y: Math.random() * this.canvas.height,
+                size: Math.random() * 2 + 0.5,
+                speedX: (Math.random() - 0.5) * 0.5,
+                speedY: (Math.random() - 0.5) * 0.5,
+                opacity: Math.random() * 0.5
+            });
+        }
+    }
+
+    animate() {
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        
+        this.particles.forEach(p => {
+            p.x += p.speedX;
+            p.y += p.speedY;
+
+            if (p.x < 0 || p.x > this.canvas.width) p.speedX *= -1;
+            if (p.y < 0 || p.y > this.canvas.height) p.speedY *= -1;
+
+            this.ctx.beginPath();
+            this.ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+            this.ctx.fillStyle = `rgba(23, 147, 213, ${p.opacity})`;
+            this.ctx.fill();
+        });
+
+        requestAnimationFrame(() => this.animate());
+    }
+}
+
+// ── Footer Injection ──
+function injectFooter() {
+    const footer = document.createElement('div');
+    footer.className = 'footer-container';
+    footer.innerHTML = `
+        <p>Geschützt durch <strong>dnbx.de</strong></p>
+        <p>Entwickelt von <a href="https://xpsystems.de" target="_blank">xpsystems.de</a> & <a href="https://ternis-edv.de" target="_blank">ternis-edv.de</a></p>
+        <div style="margin-top: 10px; opacity: 0.6">
+            <a href="#">Impressum</a> • <a href="#">Datenschutz</a>
+        </div>
+    `;
+    document.querySelector('main').appendChild(footer);
+}
+
+// Initialize
+document.addEventListener('DOMContentLoaded', () => {
+    new ParticleEngine();
+    injectFooter();
+});
