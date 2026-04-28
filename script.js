@@ -1,39 +1,42 @@
 (function() {
-    // 1. Initialize Background Effects
-    const bg = document.createElement('div');
-    bg.className = 'aurora-bg';
-    document.body.prepend(bg);
+    // 1. Create Ambient Background
+    const viewport = document.getElementById('viewport');
+    
+    const ambient = document.createElement('div');
+    ambient.className = 'bg-ambient';
+    document.body.prepend(ambient);
 
-    // 2. Build the Official Footer
+    const noise = document.createElement('div');
+    noise.className = 'bg-noise';
+    document.body.appendChild(noise);
+
+    // 2. Build the Footer (Professional Layout)
+    const card = document.querySelector('.portal-card');
     const footer = document.createElement('footer');
-    footer.className = 'official-footer';
+    footer.className = 'portal-footer';
 
     footer.innerHTML = `
-        <div class="footer-top">
-            <p>Geschützt durch <strong>dnbx.de</strong></p>
-            <p>Entwickelt von 
-                <a href="https://xpsystems.de" target="_blank">xpsystems.de</a> & 
-                <a href="https://ternis-edv.de" target="_blank">ternis-edv.de</a>
-            </p>
+        <div class="footer-credits">
+            Geschützt durch <strong>dnbx.de</strong><br>
+            Entwickelt von 
+            <a href="https://xpsystems.de" target="_blank" style="color:var(--text-high); text-decoration:none;">xpsystems.de</a> & 
+            <a href="https://ternis-edv.de" target="_blank" style="color:var(--text-high); text-decoration:none;">ternis-edv.de</a>
         </div>
-        <div class="footer-bottom">
+        <div class="footer-links">
             <a href="#">Impressum</a>
             <a href="#">Datenschutz</a>
-            <a href="https://bildungslogin-rlp.de">Bildungslogin</a>
+            <a href="https://bildungslogin-rlp.de">Bildungslogin RLP</a>
         </div>
     `;
 
-    // Append to main or app-root
-    document.querySelector('main').appendChild(footer);
+    card.appendChild(footer);
 
-    // 3. Subtle Mobile Interaction
-    // Slightly tilts the card on mobile orientation change
-    if (window.DeviceOrientationEvent) {
-        window.addEventListener('deviceorientation', (e) => {
-            const card = document.querySelector('.glass-card');
-            const tiltX = (e.beta / 20).toFixed(2);
-            const tiltY = (e.gamma / 20).toFixed(2);
-            card.style.transform = `rotateX(${tiltX}deg) rotateY(${tiltY}deg)`;
+    // 3. Performance: Passive Tilt Effect (Desktop Only)
+    if (window.innerWidth > 1024) {
+        document.addEventListener('mousemove', (e) => {
+            const x = (window.innerWidth / 2 - e.pageX) / 50;
+            const y = (window.innerHeight / 2 - e.pageY) / 50;
+            card.style.transform = `rotateX(${y}deg) rotateY(${-x}deg)`;
         });
     }
 })();

@@ -2,29 +2,39 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Schulchat-RLP | Offizielles Portal</title>
-    <meta name="description" content="Sicherer Login für den Schulchat Rheinland-Pfalz.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Schulchat-RLP | Zentrales Login</title>
+    <meta name="description" content="Offizielles Kommunikationsportal für Schulen in Rheinland-Pfalz.">
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div id="app-root">
-        <main>
-            <div class="glass-card">
-                <header class="card-header">
-                    <img src="logo-2x.png" alt="RLP Logo" class="main-logo">
-                    <div class="badge">Sicherer Zugang</div>
+    <div id="viewport">
+        <main class="auth-layout">
+            <div class="portal-card">
+                <div class="card-glow"></div>
+                
+                <header class="portal-header">
+                    <div class="logo-wrapper">
+                        <img src="logo-2x.png" alt="Schulchat-RLP Logo" class="portal-logo">
+                    </div>
+                    <div class="status-indicator">
+                        <span class="dot"></span> System bereit
+                    </div>
                 </header>
 
-                <section class="card-body">
-                    <h1>Schulchat-RLP</h1>
-                    <p class="subtitle">Das offizielle Kommunikationsportal für Schulen in Rheinland-Pfalz.</p>
-                    
-                    <div class="cta-wrapper">
+                <section class="portal-content">
+                    <div class="text-group">
+                        <h1>Schulchat-RLP</h1>
+                        <p>Das offizielle Kommunikationsportal des Landes Rheinland-Pfalz. Bitte melden Sie sich mit Ihrem Bildungslogin an.</p>
+                    </div>
+
+                    <div class="action-area">
                         <a href="https://bildungslogin-rlp.de" class="btn-primary">
-                            <span>Mit Bildungslogin anmelden</span>
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                            <span class="btn-text">Mit Bildungslogin anmelden</span>
+                            <div class="btn-icon">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+                            </div>
                         </a>
                     </div>
                 </section>
