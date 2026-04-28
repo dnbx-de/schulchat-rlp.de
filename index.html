@@ -3,44 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Schulchat-RLP | Zentrales Login</title>
-    <meta name="description" content="Offizielles Kommunikationsportal für Schulen in Rheinland-Pfalz.">
+    <meta name="description" content="Offizielles Kommunikationsportal für Schulen in Rheinland-Pfalz - Schulungsumgebung">
+    <meta name="theme-color" content="#2e628c">
+    
+    <!-- Apple Web App Meta Tags -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Schulchat RLP">
+
+    <title>Schulchat RLP | Startseite</title>
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="viewport">
-        <main class="auth-layout">
-            <div class="portal-card">
-                <div class="card-glow"></div>
-                
-                <header class="portal-header">
-                    <div class="logo-wrapper">
-                        <img src="logo-2x.png" alt="Schulchat-RLP Logo" class="portal-logo">
-                    </div>
-                    <div class="status-indicator">
-                        <span class="dot"></span> System bereit
-                    </div>
-                </header>
 
-                <section class="portal-content">
-                    <div class="text-group">
-                        <h1>Schulchat-RLP</h1>
-                        <p>Das offizielle Kommunikationsportal des Landes Rheinland-Pfalz. Bitte melden Sie sich mit Ihrem Bildungslogin an.</p>
-                    </div>
+    <!-- Dynamic Background Layers -->
+    <div class="bg-ambient"></div>
+    <div class="bg-noise"></div>
 
-                    <div class="action-area">
-                        <a href="https://bildungslogin-rlp.de" class="btn-primary">
-                            <span class="btn-text">Mit Bildungslogin anmelden</span>
-                            <div class="btn-icon">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
-                            </div>
-                        </a>
-                    </div>
-                </section>
-            </div>
-        </main>
-    </div>
+    <main class="auth-layout">
+        <div class="portal-card" id="card">
+            <div class="card-glow"></div>
+            
+            <header class="portal-header">
+                <div class="logo-wrapper">
+                    <!-- SVG Logo from Source 1 -->
+                    <svg class="splash-logo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="50" cy="50" r="48" fill="#2e628c" />
+                        <path d="M25 35 Q 25 25 50 25 Q 75 25 75 35 Q 75 55 50 55 Q 40 55 30 65 L 30 52 Q 25 48 25 35 Z" fill="#ffffff" />
+                        <text x="50" y="44" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#2e628c" text-anchor="middle">RLP</text>
+                    </svg>
+                </div>
+                <div class="status-indicator">
+                    <span class="dot"></span> System bereit
+                </div>
+            </header>
+
+            <section class="portal-content">
+                <div class="text-group">
+                    <h1>Schulchat RLP</h1>
+                    <p>Das offizielle Kommunikationsportal des Landes Rheinland-Pfalz. Bitte melden Sie sich mit Ihrem Bildungslogin an.</p>
+                </div>
+
+                <div class="action-area">
+                    <!-- Interactive Button -->
+                    <a href="https://bildungslogin-rlp.de" class="btn-primary" id="loginBtn">
+                        <span class="btn-loader"></span> <!-- Loader from Source 1 -->
+                        <span class="btn-text" id="btnText">Mit Bildungslogin anmelden</span>
+                        <div class="btn-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+                        </div>
+                    </a>
+                </div>
+            </section>
+
+            <!-- Footer Container populated by JS -->
+            <footer class="portal-footer" id="footerContainer"></footer>
+        </div>
+    </main>
+
     <script src="script.js"></script>
 </body>
 </html>

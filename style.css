@@ -1,13 +1,23 @@
+
+/* 
+    * DESIGN SYSTEM & VARIABLES 
+    * Merging the dark theme of the Portal with the Brand Color of the Splash Screen 
+    */
 :root {
-    --brand-primary: #1793d5;
-    --brand-hover: #1ca1e9;
+    /* Brand Color from Splash Screen */
+    --brand-primary: #2e628c;
+    --brand-hover: #3e7ca8;
     --brand-accent: #c4d700;
+    
+    /* Dark Theme Base */
     --bg-base: #0a0c10;
     --card-surface: rgba(17, 20, 24, 0.85);
-    --border-subtle: rgba(255, 255, 255, 0.1);
+    --border-subtle: rgba(255, 255, 255, 0.08);
+    
+    /* Typography */
     --text-high: #f8fafc;
     --text-mid: #94a3b8;
-    --font-main: 'Inter', sans-serif;
+    --font-main: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -22,23 +32,30 @@ body {
     align-items: center;
     overflow: hidden;
     -webkit-font-smoothing: antialiased;
+    user-select: none; /* From Splash Screen for App-like feel */
 }
 
-/* ── Sophisticated Background ── */
+/* ── Ambient Background ── */
 .bg-ambient {
     position: fixed;
     inset: 0;
-    z-index: -1;
+    z-index: -2;
     background: 
-        radial-gradient(circle at 10% 10%, rgba(23, 147, 213, 0.12) 0%, transparent 40%),
+        radial-gradient(circle at 10% 10%, rgba(46, 98, 140, 0.15) 0%, transparent 40%),
         radial-gradient(circle at 90% 90%, rgba(196, 215, 0, 0.05) 0%, transparent 40%);
+    animation: pulseBackground 10s ease-in-out infinite alternate;
+}
+
+@keyframes pulseBackground {
+    0% { opacity: 0.8; transform: scale(1); }
+    100% { opacity: 1; transform: scale(1.05); }
 }
 
 .bg-noise {
     position: fixed;
     inset: 0;
     z-index: -1;
-    opacity: 0.03;
+    opacity: 0.04;
     pointer-events: none;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
@@ -55,18 +72,19 @@ body {
     border-radius: 24px;
     padding: 3rem 2.5rem;
     box-shadow: 
-        0 10px 15px -3px rgba(0, 0, 0, 0.3),
-        0 4px 6px -4px rgba(0, 0, 0, 0.3),
+        0 20px 40px -5px rgba(0, 0, 0, 0.4),
+        0 10px 20px -5px rgba(0, 0, 0, 0.2),
         inset 0 1px 1px rgba(255, 255, 255, 0.05);
-    animation: reveal 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    animation: reveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    opacity: 0; /* Start hidden for animation */
+    transform: translateY(20px) scale(0.98);
 }
 
 @keyframes reveal {
-    from { opacity: 0; transform: translateY(20px) scale(0.98); }
     to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
-/* ── Card Elements ── */
+/* ── Header & Logo ── */
 .portal-header {
     display: flex;
     justify-content: space-between;
@@ -74,9 +92,23 @@ body {
     margin-bottom: 2.5rem;
 }
 
-.portal-logo {
-    height: 48px;
-    filter: drop-shadow(0 0 12px rgba(23, 147, 213, 0.3));
+/* SVG Logo Styling */
+.logo-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.splash-logo {
+    width: 56px;
+    height: 56px;
+    filter: drop-shadow(0 4px 12px rgba(46, 98, 140, 0.4));
+    transition: transform 0.3s ease;
+}
+
+/* Subtle hover float for logo */
+.logo-wrapper:hover .splash-logo {
+    transform: translateY(-2px);
 }
 
 .status-indicator {
@@ -91,6 +123,8 @@ body {
     display: flex;
     align-items: center;
     gap: 6px;
+    border: 1px solid rgba(255,255,255,0.05);
+    transition: all 0.3s ease;
 }
 
 .status-indicator .dot {
@@ -99,8 +133,16 @@ body {
     background: #10b981;
     border-radius: 50%;
     box-shadow: 0 0 8px #10b981;
+    animation: pulseDot 2s infinite;
 }
 
+@keyframes pulseDot {
+    0% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+/* ── Content Typography ── */
 h1 {
     font-size: 1.75rem;
     font-weight: 700;
@@ -118,7 +160,7 @@ h1 {
     margin-bottom: 2.5rem;
 }
 
-/* ── Professional Button ── */
+/* ── Interactive Button ── */
 .btn-primary {
     display: flex;
     align-items: center;
@@ -132,28 +174,70 @@ h1 {
     font-size: 0.95rem;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     border: 1px solid rgba(255,255,255,0.1);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
 }
 
 .btn-icon {
     background: rgba(255, 255, 255, 0.15);
-    width: 44px;
-    height: 44px;
+    width: 48px;
+    height: 48px;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 11px;
-    transition: transform 0.3s;
+    transition: all 0.3s;
 }
 
+/* Hover States */
 .btn-primary:hover {
     background: var(--brand-hover);
     transform: translateY(-2px);
-    box-shadow: 0 10px 25px -5px rgba(23, 147, 213, 0.4);
+    box-shadow: 0 10px 25px -5px rgba(46, 98, 140, 0.5);
 }
 
 .btn-primary:hover .btn-icon {
-    transform: translateX(2px);
+    transform: translateX(3px);
     background: rgba(255, 255, 255, 0.25);
+}
+
+/* Active/Loading States */
+.btn-primary.loading {
+    pointer-events: none;
+    background: var(--brand-hover);
+    padding-left: 20px; /* Reset padding */
+}
+
+.btn-primary.loading .btn-icon {
+    opacity: 0;
+    transform: translateX(20px);
+    width: 0;
+    padding: 0;
+    margin: 0;
+}
+
+/* The Loader from Source 1, adapted for the button */
+.btn-loader {
+    display: none; /* Hidden by default */
+    width: 24px;
+    height: 24px;
+    border: 2px solid rgba(255,255,255, 0.3);
+    border-top: 2px solid #ffffff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    position: absolute;
+    left: 20px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.btn-primary.loading .btn-loader {
+    display: block;
 }
 
 /* ── Footer ── */
@@ -162,10 +246,53 @@ h1 {
     padding-top: 1.5rem;
     border-top: 1px solid var(--border-subtle);
     text-align: center;
-    font-size: 0.75rem;
-    color: var(--text-mid);
 }
 
-.footer-credits { margin-bottom: 1rem; line-height: 1.7; }
-.footer-credits strong { color: var(--text-high); font-weight: 600; }
-.footer-links { display: flex; justify-content: center; gap: 1.5rem; opacity: 0.7; }
+.training-notice {
+    font-size: 0.75rem;
+    color: var(--text-mid);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    opacity: 0.8;
+}
+
+.training-notice::before {
+    content: '';
+    display: inline-block;
+    width: 4px;
+    height: 4px;
+    background-color: var(--brand-accent);
+    border-radius: 50%;
+}
+
+.footer-credits {
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.4);
+    line-height: 1.6;
+    margin-bottom: 0.5rem;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    font-size: 0.75rem;
+}
+
+.footer-links a {
+    color: var(--text-mid);
+    text-decoration: none;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+}
+
+.footer-links a:hover { opacity: 1; text-decoration: underline; }
+
+/* 3D Tilt Effect on Desktop */
+.tilt-inner {
+    transition: transform 0.1s ease-out;
+    transform-style: preserve-3d;
+}
