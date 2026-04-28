@@ -1,83 +1,117 @@
-// --- Particle System ---
-const canvas = document.getElementById('particle-canvas');
-const ctx = canvas.getContext('2d');
-let particles = [];
+/**
+ * Schulchat-RLP - Dynamic UI Engine
+ * Particle System + Official Footer Injection
+ */
 
-function resize() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-}
+const UI = {
+    init() {
+        this.injectBackground();
+        this.initParticles();
+        this.injectFooter();
+    },
 
-window.addEventListener('resize', resize);
-resize();
+    injectBackground() {
+        const mesh = document.createElement('div');
+        mesh.className = 'mesh-bg';
+        document.body.prepend(mesh);
 
-class Particle {
-    constructor() {
-        this.reset();
+        const canvas = document.createElement('canvas');
+        canvas.id = 'particle-canvas';
+        document.body.prepend(canvas);
+    },
+
+    injectFooter() {
+        const footer = document.createElement('footer');
+        footer.className = 'footer-note';
+        footer.innerHTML = `
+            <span class="footer-credit">Geschützt durch <strong>dnbx.de</strong></span>
+            <div>Entwickelt von <a href="https://xpsystems.de" target="_blank">xpsystems.de</a> & <a href="https://ternis-edv.de" target="_blank">ternis-edv.de</a></div>
+            <div class="footer-links">
+                <a href="#">Impressum</a>
+                <a href="#">Datenschutz</a>
+                <a href="https://bildungslogin-rlp.de">Bildungslogin RLP</a>
+            </div>
+        `;
+        document.querySelector('.glass-card').appendChild(footer);
+    },
+
+    initParticles() {
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        const particleCount = window.innerWidth < 480 ? 40 : 100; // Optimization for Mobile
+
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 1.5 + 0.5;
+                this.speedX = Math.random() * 0.4 - 0.2;
+                this.speedY = Math.random() * 0.4 - 0.2;
+                this.opacity = Math.random() * 0.5 + 0.2;
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                if (this.x > canvas.width) this.x = 0;
+                else if (this.x < 0) this.x = canvas.width;
+                if (this.y > canvas.height) this.y = 0;
+                else if (this.y < 0) this.y = canvas.height;
+            }
+
+            draw() {
+                ctx.fillStyle = `rgba(23, 147, 213, ${this.opacity})`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function createParticles() {
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+
+                // Draw lines between nearby particles for "Network" look
+                for (let j = i; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < 120) {
+                        ctx.strokeStyle = `rgba(23, 147, 213, ${0.15 - distance / 800})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(animate);
+        }
+
+        createParticles();
+        animate();
     }
-    reset() {
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 2 + 0.5;
-        this.speedX = Math.random() * 0.5 - 0.25;
-        this.speedY = Math.random() * 0.5 - 0.25;
-        this.opacity = Math.random() * 0.5;
-    }
-    update() {
-        this.x += this.speedX;
-        this.y += this.speedY;
-        if (this.x > canvas.width || this.x < 0 || this.y > canvas.height || this.y < 0) this.reset();
-    }
-    draw() {
-        ctx.fillStyle = `rgba(23, 147, 213, ${this.opacity})`;
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fill();
-    }
-}
+};
 
-for (let i = 0; i < 80; i++) particles.push(new Particle());
-
-function animate() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    particles.forEach(p => { p.update(); p.draw(); });
-    requestAnimationFrame(animate);
-}
-animate();
-
-// --- Interactive 3D Tilt & Glow ---
-const card = document.getElementById('main-card');
-document.addEventListener('mousemove', (e) => {
-    const { clientX, clientY } = e;
-    const { innerWidth, innerHeight } = window;
-    
-    // Update Glow position
-    const rect = card.getBoundingClientRect();
-    const x = ((clientX - rect.left) / rect.width) * 100;
-    const y = ((clientY - rect.top) / rect.height) * 100;
-    card.style.setProperty('--mouse-x', `${x}%`);
-    card.style.setProperty('--mouse-y', `${y}%`);
-
-    // Subtle Tilt logic
-    const moveX = (clientX - innerWidth / 2) / 50;
-    const moveY = (clientY - innerHeight / 2) / 50;
-    card.style.transform = `rotateY(${moveX}deg) rotateX(${-moveY}deg)`;
-});
-
-// --- Dynamic Official Footer ---
-(function() {
-    const footer = document.createElement('footer');
-    footer.className = 'footer-note';
-    footer.innerHTML = `
-        <div>Geschützt durch <a href="https://dnbx.de" target="_blank">dnbx.de</a></div>
-        <div class="footer-brand">
-            <span>Entwickelt von <a href="https://xpsystems.de" target="_blank">xpsystems.de</a></span>
-            <span style="opacity:0.3">|</span>
-            <span><a href="https://ternis-edv.de" target="_blank">ternis-edv.de</a></span>
-        </div>
-        <div style="margin-top:15px; opacity:0.5">
-            <a href="#">Impressum</a> &bull; <a href="#">Datenschutz</a>
-        </div>
-    `;
-    document.querySelector('main').appendChild(footer);
-})();
+document.addEventListener('DOMContentLoaded', () => UI.init());
