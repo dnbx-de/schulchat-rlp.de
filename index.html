@@ -2,32 +2,35 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Schulchat-RLP | Offizielles Portal</title>
+    <meta name="description" content="Sicherer Login für den Schulchat Rheinland-Pfalz.">
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 </head>
 <body>
-    <canvas id="particle-canvas"></canvas>
-    
-    <main>
-        <div class="glass-card">
-            <div class="badge">Sicher • Offiziell • RLP</div>
-            <img src="logo-2x.png" alt="Logo" class="logo">
-            
-            <header>
-                <h1>Schulchat-RLP</h1>
-                <p class="subtitle">Die moderne Kommunikationsplattform für Schulen in Rheinland-Pfalz.</p>
-            </header>
+    <div id="app-root">
+        <main>
+            <div class="glass-card">
+                <header class="card-header">
+                    <img src="logo-2x.png" alt="RLP Logo" class="main-logo">
+                    <div class="badge">Sicherer Zugang</div>
+                </header>
 
-            <div class="action-area">
-                <a href="https://bildungslogin-rlp.de" class="btn-primary">
-                    <span>Mit Bildungslogin anmelden</span>
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                </a>
+                <section class="card-body">
+                    <h1>Schulchat-RLP</h1>
+                    <p class="subtitle">Das offizielle Kommunikationsportal für Schulen in Rheinland-Pfalz.</p>
+                    
+                    <div class="cta-wrapper">
+                        <a href="https://bildungslogin-rlp.de" class="btn-primary">
+                            <span>Mit Bildungslogin anmelden</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                        </a>
+                    </div>
+                </section>
             </div>
-        </div>
-    </main>
-
+        </main>
+    </div>
     <script src="script.js"></script>
 </body>
 </html>
